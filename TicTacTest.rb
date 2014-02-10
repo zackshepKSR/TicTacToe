@@ -1,10 +1,10 @@
 # Game board code
 
-$board = { "1" => "1", 2 => "2", 3 => "3", 4 => "4", 5 => "5", 6 => "6", 7 => "7", 8 => "8", 9 => "9" }
+$board = { 1 => "1", 2 => "2", 3 => "3", 4 => "4", 5 => "5", 6 => "6", 7 => "7", 8 => "8", 9 => "9" }
 
 def showboard
 	puts "-------------
-| #{$board["1"]} | #{$board[2]} | #{$board[3]} |
+| #{$board[1]} | #{$board[2]} | #{$board[3]} |
 -------------
 | #{$board[4]} | #{$board[5]} | #{$board[6]} |
 -------------
@@ -13,6 +13,36 @@ def showboard
 
 "
 end
+
+# def win_test
+# 	$board.check
+
+# def winning
+# 	if 
+
+# winning_combos = [
+#   ["1","2","3"],
+#   ["4","5","6"],
+#   ["7","8","9"],
+#   ["1","4","7"],
+#   ["2","5","8"],
+#   ["3","6","9"],
+#   ["1","5","9"],
+#   ["3","5","7"],
+# ]
+
+# Game: play
+
+def turns 
+	counter = 1
+	while counter < 5
+		$player1.move
+		$player2.move
+		counter = counter + 1
+	end
+end
+
+turns
 
 # Players
 class Player
@@ -37,10 +67,11 @@ class Player
 	end
 end
 
-player1 = Player.new("Player 1", "X")
-player2 = Player.new("Player 2", "O")
+$player1 = Player.new("Player 1", "X")
+$player2 = Player.new("Player 2", "O")
 
-
+$current_player = 1
+game_end = false
 
 
 # Game: intro
@@ -48,9 +79,29 @@ player2 = Player.new("Player 2", "O")
 puts "Welcome to Tic-tac-toe! Here is our game board."
 showboard
 
-# Game: play
 
-player1.move
-player2.move
+
+	
+# end
+
+
+# while !game_end {
+# 	players[current_player].move
+# 	current_player = (current_player + 1) % 2
+# }
+
+# 	loop {player1.move, player2.move}
+	# if 
+	# 	turn
+	#   	player1.move
+	#   	turn = !turn
+	# else
+	#   	player2.move
+	#   	turn = !turn
+	# end
+
+
+# player1.move
+# player2.move
 
 
