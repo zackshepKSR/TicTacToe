@@ -31,19 +31,6 @@ end
 #   ["3","5","7"],
 # ]
 
-# Game: play
-
-def turns 
-	counter = 1
-	while counter < 5
-		$player1.move
-		$player2.move
-		counter = counter + 1
-	end
-end
-
-turns
-
 # Players
 class Player
 	def initialize(name, letter)
@@ -73,6 +60,16 @@ $player2 = Player.new("Player 2", "O")
 $current_player = 1
 game_end = false
 
+# Game: play
+
+def turns 
+	counter = 1
+	while counter < 5
+		$player1.move
+		$player2.move
+		counter = counter + 1
+	end
+end
 
 # Game: intro
 
@@ -80,6 +77,8 @@ puts "Welcome to Tic-tac-toe! Here is our game board."
 showboard
 
 
+
+turns
 
 	
 # end
