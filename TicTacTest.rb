@@ -1,6 +1,8 @@
-# Game board code
+# Game board
 
-$board = { 1 => "1", 2 => "2", 3 => "3", 4 => "4", 5 => "5", 6 => "6", 7 => "7", 8 => "8", 9 => "9" }
+$board = { 1 => "1", 2 => "2", 3 => "3", 
+		   4 => "4", 5 => "5", 6 => "6", 
+		   7 => "7", 8 => "8", 9 => "9" }
 
 def showboard
 	puts "-------------
@@ -14,22 +16,34 @@ def showboard
 "
 end
 
-# def win_test
-# 	$board.check
+$winning_combos = [
+  [1,2,3],
+  [4,5,6],
+  [7,8,9],
+  [1,4,7],
+  [2,5,8],
+  [3,6,9],
+  [1,5,9],
+  [3,5,7]
+]
+
+ def win_test
+	placeholder = board.select { |key, value| value == @letter }
+	positions = placeholder.keys
+		$winning_combos.each { 
+			|x| if x == positions
+				puts "You win!"
+			else
+				nil
+			end
+		}
+	end
+
 
 # def winning
 # 	if 
 
-# winning_combos = [
-#   ["1","2","3"],
-#   ["4","5","6"],
-#   ["7","8","9"],
-#   ["1","4","7"],
-#   ["2","5","8"],
-#   ["3","6","9"],
-#   ["1","5","9"],
-#   ["3","5","7"],
-# ]
+
 
 # Players
 class Player
@@ -40,17 +54,28 @@ class Player
 
 	# Move method
 	def move
+		# Player move
 		puts "#{@name} you are #{@letter}s. Enter the number where you'd like to place an #{@letter}."
 		position = gets.chomp
 		$board.each {
 			|key, value| 
 				if value == position
 					value.replace(@letter)
+					showboard
+					# test win code
+					placeholder = $board.select { |key, value| value == @letter }
+						positions = placeholder.keys
+							$winning_combos.each { 
+								|x| if x == positions
+									puts "#{@name} WINS!"
+								else
+									nil
+								end
+							}
 				else
 					nil
 				end
-		}
-		showboard
+		}		
 	end
 end
 
@@ -60,8 +85,7 @@ $player2 = Player.new("Player 2", "O")
 $current_player = 1
 game_end = false
 
-# Game: play
-
+# Game play
 def turns 
 	counter = 1
 	while counter < 5
@@ -72,35 +96,9 @@ def turns
 end
 
 # Game: intro
-
 puts "Welcome to Tic-tac-toe! Here is our game board."
 showboard
-
-
-
 turns
 
-	
-# end
-
-
-# while !game_end {
-# 	players[current_player].move
-# 	current_player = (current_player + 1) % 2
-# }
-
-# 	loop {player1.move, player2.move}
-	# if 
-	# 	turn
-	#   	player1.move
-	#   	turn = !turn
-	# else
-	#   	player2.move
-	#   	turn = !turn
-	# end
-
-
-# player1.move
-# player2.move
-
+# http://www.informit.com/articles/article.aspx?p=26943&seqNum=3
 
