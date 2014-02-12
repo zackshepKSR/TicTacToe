@@ -56,7 +56,7 @@ $game_end = false
 			}
 end
 
-# Players
+# Players class
 class Player
 	def initialize(name, letter)
 		@name = name
@@ -83,27 +83,26 @@ class Player
 end
 
 
-# Create the players
-
+# Create the players and set current player
 $player1 = Player.new("Player 1", "X")
 $player2 = Player.new("Player 2", "O")
+$current_player = 1
 
-$current_player = $player1
-
+# Switching current player
 def turns
-# 	if $current_player == $player1
-# 		$player1.move
-# 		$current_player = $player2
-#     else $player2.move
-#          $current_player = $player1
-#     end
-# end
-
-# Define game play (works but not perfect)
-# def turns 
-	while $game_end == false
+	if $current_player == 1
 		$player1.move
+		$current_player += 1
+	else 
 		$player2.move
+		$current_player -= 1
+	end
+end
+
+# Looping turns. Couldn't figure this out in the turns method.
+def play
+	while $game_end == false
+		turns
 	end
 end
 
@@ -112,6 +111,5 @@ puts "Welcome to Tic-tac-toe! Here is our game board."
 showboard
 
 # Lets play!
-turns
-
+play
 
