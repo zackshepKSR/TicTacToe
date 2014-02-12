@@ -1,8 +1,16 @@
-# Create the game board with a hash, a method to render it, the winning combinations, and a variable for if the game is over.
+# TO DO:
+# * Get rid of these global variables and put the board in a class after i have the logic working.
+# * Add tie logic
+# * Add position overwrite error control. 
+
+# Create the game postions with a hash. Using numbers to reduce 
+# input error and make it easy to check if a cell is already 
+# taken or the input is valid with some letter vs number logic.
 $board = { 1 => "1", 2 => "2", 3 => "3", 
 		   4 => "4", 5 => "5", 6 => "6", 
 		   7 => "7", 8 => "8", 9 => "9" }
 
+# Create a method to show the board
 def showboard
 	puts "-------------
 | #{$board[1]} | #{$board[2]} | #{$board[3]} |
@@ -15,6 +23,7 @@ def showboard
 "
 end
 
+# Variable for the winning combinations
 $winning_combos = [
   [1,2,3],
   [4,5,6],
@@ -26,10 +35,10 @@ $winning_combos = [
   [3,5,7]
 ]
 
+# Setting game over variable to false
 $game_end = false
 
 # Defining the game win logic as well as game ties
-
  def win_test
  	# Create a hash from entries where the value matches player @letter
 	positions_hash = $board.select { |key, value| value == @letter }
