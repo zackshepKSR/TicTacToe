@@ -3,6 +3,7 @@
 # * Add tie logic
 # * Add position overwrite error control. 
 
+#--------------------------------------------------------------
 # Create the game postions with a hash. Using numbers to reduce 
 # input error and make it easy to check if a cell is already 
 # taken or the input is valid with some letter vs number logic.
@@ -42,7 +43,8 @@ $game_end = false
  def win_test
  	# Create a hash from entries where the value matches player @letter
 	positions_hash = $board.select { |key, value| value == @letter }
-	# Now make an array of the key values. We will compare this against the winning_combos
+	# Now make an array of the key values. We will compare this against 
+	# the winning_combos
 	positions_array = positions_hash.keys
 		# Did the current move win the game?
 		$winning_combos.each { 
@@ -54,7 +56,14 @@ $game_end = false
 					nil
 				end
 			}
+
 end
+
+# def tie_test
+# 	values = $board.value 
+
+# 		|key, value| 
+# 	}
 
 # Players class
 class Player
@@ -99,11 +108,17 @@ def turns
 	end
 end
 
-# Looping turns. Couldn't figure this out in the turns method.
+# Looping turns with a limit of 9 for tie games. 
+# Couldn't figure this out in the turns method.
 def play
-	while $game_end == false
-		turns
-	end
+	# while $game_end == false
+		9.times { 
+			if $game_end == false
+				turns
+			else
+				nil
+			end
+		}
 end
 
 # Game: intro
@@ -112,4 +127,3 @@ showboard
 
 # Lets play!
 play
-
