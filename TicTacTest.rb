@@ -1,5 +1,4 @@
-# Game board
-
+# Create the game board with a hash, a method to render it, the winning combinations, and a variable for if the game is over.
 $board = { 1 => "1", 2 => "2", 3 => "3", 
 		   4 => "4", 5 => "5", 6 => "6", 
 		   7 => "7", 8 => "8", 9 => "9" }
@@ -17,7 +16,6 @@ def showboard
 end
 
 $winning_combos = [
-<<<<<<< HEAD
   [1,2,3],
   [4,5,6],
   [7,8,9],
@@ -28,41 +26,26 @@ $winning_combos = [
   [3,5,7]
 ]
 
+$game_end = false
+
+# Defining the game win logic as well as game ties
+
  def win_test
-	placeholder = board.select { |key, value| value == @letter }
-	positions = placeholder.keys
+ 	# Create a hash from entries where the value matches player @letter
+	positions_hash = $board.select { |key, value| value == @letter }
+	# Now make an array of the key values. We will compare this against the winning_combos
+	positions_array = positions_hash.keys
+		# Did the current move win the game?
 		$winning_combos.each { 
-			|x| if x == positions
-				puts "You win!"
-			else
-				nil
-			end
-		}
-	end
-
-=======
-  ["1","2","3"],
-  ["4","5","6"],
-  ["7","8","9"],
-  ["1","4","7"],
-  ["2","5","8"],
-  ["3","6","9"],
-  ["1","5","9"],
-  ["3","5","7"],
-]
-
-
-# def win_test
-# 	$board.check
->>>>>>> 4804136f57a38455e485aa29e4dc2b072f821c48
-
-# def winning
-# 	if 
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 4804136f57a38455e485aa29e4dc2b072f821c48
+			|x| if x == positions_array
+				puts "#{@name} WINS!"
+				$game_end = true
+				return
+				else
+					nil
+				end
+			}
+end
 
 # Players
 class Player
@@ -80,17 +63,9 @@ class Player
 			|key, value| 
 				if value == position
 					value.replace(@letter)
-					showboard
 					# test win code
-					placeholder = $board.select { |key, value| value == @letter }
-						positions = placeholder.keys
-							$winning_combos.each { 
-								|x| if x == positions
-									puts "#{@name} WINS!"
-								else
-									nil
-								end
-							}
+					showboard
+					win_test
 				else
 					nil
 				end
@@ -98,27 +73,36 @@ class Player
 	end
 end
 
+
+# Create the players
+
 $player1 = Player.new("Player 1", "X")
 $player2 = Player.new("Player 2", "O")
 
-$current_player = 1
-game_end = false
+$current_player = $player1
 
-# Game play
-def turns 
-	counter = 1
-	while counter < 5
+def turns
+# 	if $current_player == $player1
+# 		$player1.move
+# 		$current_player = $player2
+#     else $player2.move
+#          $current_player = $player1
+#     end
+# end
+
+# Define game play (works but not perfect)
+# def turns 
+	while $game_end == false
 		$player1.move
 		$player2.move
-		counter = counter + 1
 	end
 end
 
 # Game: intro
 puts "Welcome to Tic-tac-toe! Here is our game board."
 showboard
+
+# Lets play!
 turns
 
-
-# http://www.informit.com/articles/article.aspx?p=26943&seqNum=3
 
