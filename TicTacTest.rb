@@ -51,8 +51,6 @@ $game_end = false
 				puts "#{@name} WINS!"
 				$game_end = true
 				return
-				else
-					nil
 				end
 			}
 
@@ -115,8 +113,6 @@ def play
 		9.times { 
 			if $game_end == false
 				turns
-			else
-				nil
 			end
 		}
 end
