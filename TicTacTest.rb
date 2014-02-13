@@ -1,7 +1,7 @@
 # TO DO:
 # * Get rid of these global variables and put the board in a class after i have the logic working.
-# * Add tie logic
-# * Add position overwrite error control. 
+# * Add tie game message
+# * Add position overwrite and input error handling. 
 
 #--------------------------------------------------------------
 # Create the game postions with a hash. Using numbers to reduce 
@@ -59,12 +59,6 @@ $game_end = false
 
 end
 
-# def tie_test
-# 	values = $board.value 
-
-# 		|key, value| 
-# 	}
-
 # Players class
 class Player
 	def initialize(name, letter)
@@ -74,23 +68,23 @@ class Player
 
 	# Move method
 	def move
-		# Player move
 		puts "#{@name} you are #{@letter}s. Enter the number where you'd like to place an #{@letter}."
 		position = gets.chomp
 		$board.each {
 			|key, value| 
 				if value == position
 					value.replace(@letter)
-					# test win code
 					showboard
 					win_test
-				else
-					nil
 				end
 		}		
 	end
 end
 
+# def overwrite_test
+# 	$board.each {
+# 		|key, value| 
+# 			if value == position
 
 # Create the players and set current player
 $player1 = Player.new("Player 1", "X")
