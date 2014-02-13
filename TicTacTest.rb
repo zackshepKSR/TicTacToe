@@ -1,7 +1,6 @@
 # TO DO:
-# * Get rid of these global variables and put the board in a class after i have the logic working.
 # * Add tie game message
-# * Add position overwrite and input error handling. 
+# * Get rid of these global variables and put the board in a class after i have the logic working.
 
 #--------------------------------------------------------------
 # Create the game postions with a hash. Using numbers to reduce 
@@ -70,14 +69,21 @@ class Player
 	def move
 		puts "#{@name} you are #{@letter}s. Enter the number where you'd like to place an #{@letter}."
 		position = gets.chomp
-		$board.each {
-			|key, value| 
-				if value == position
-					value.replace(@letter)
-					showboard
-					win_test
-				end
-		}		
+		# Using value to do an overwrite check and valid 1-9 move in one.
+		if $board.has_value?(position)
+			# If the value is there it replaces it with the player letter	
+			$board.each {
+				|key, value| 
+					if value == position
+						value.replace(@letter)
+						showboard
+						win_test
+					end
+			}		
+		else
+			puts "Invalid move try again. You have to enter a number between 1-9 that isn't taken."
+			move
+		end
 	end
 end
 
