@@ -81,7 +81,7 @@ class Player
 					end
 			}		
 		else
-			puts "Invalid move try again. You have to enter a number between 1-9 that isn't taken."
+			puts "Invalid move try again. Enter a number between 1-9 that isn't taken."
 			move
 		end
 	end
